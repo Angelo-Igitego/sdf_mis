@@ -29,7 +29,12 @@ if (isset($_POST['submit'])) {
 
 	// 5. Execute the query like this: 
 	if (mysqli_query($connection, $query) === true) {
-		echo "Your application has been submitted! You will be informed of the feedback of your application not later than September 15, 2021.";
+		  $last_id = mysqli_insert_id($connection);
+
+		$flash_message = "Your application has been submitted! You will be informed of the feedback of your application not later than September 15, 2021.";
+
+		header("location: show_applicant.php/?applicant_id=$last_id");
+
 	} else {
 		echo "ERROR: There was a problem" . mysqli_error($connection);
 	}
